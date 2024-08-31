@@ -1,0 +1,4 @@
+sudo apt update #こんなかんじ aptをアプデすれば良き
+sudo apt-get install xvfb #xvfbを導入するのじゃ
+
+で、出来ないと....
