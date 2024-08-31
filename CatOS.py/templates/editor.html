@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Text Editor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function saveFile() {
+            const content = document.getElementById('editor').value;
+            await fetch('/save_file', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `content=${encodeURIComponent(content)}`,
+            });
+            alert('File saved!');
+        }
+
+        async function loadFile() {
+            const response = await fetch('/load_file');
+            const content = await response.text();
+            document.getElementById('editor').value = content;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Text Editor</h1>
+        <textarea id="editor"></textarea>
+        <br>
+        <button onclick="saveFile()">Save</button>
+        <button onclick="loadFile()">Load</button>
+    </div>
+</body>
+</html>
